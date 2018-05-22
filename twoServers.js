@@ -1,33 +1,40 @@
-// Require/import the HTTP module
+// We require/import the HTTP module
 var http = require("http");
 
-// Define a port to listen for incoming requests
+// =====================================================================
+
+// Then define the ports we want to listen to
 var PORTONE = 7000;
-var PORTTWO = 7500
+var PORTTWO = 7500;
 
-// Create a generic function to handle requests and responses
+// =====================================================================
+
+// We need two different functions to handle requests, one for each server.
 function handleRequestOne(request, response) {
-
-  // Send the below string to the client when the user visits the PORT URL
-  response.end("You are an awesome coder!! Path Hit: " + request.url);
-
-  function handleRequestTwo(request, response) {
-  response.end("This is not for you!! Path Hit: " + request.url);
-
+  response.end("You're a coding genius!");
 }
 
-// Use the Node HTTP package to create our server.
-// Pass the handleRequest function to empower it with functionality.
+function handleRequestTwo(request, response) {
+  response.end("This is not for you");
+}
+
+// =====================================================================
+
+// Create our servers
 var serverOne = http.createServer(handleRequestOne);
 var serverTwo = http.createServer(handleRequestTwo);
 
-// Start our server so that it can begin listening to client requests.
-server.listen(PORTONE, function() {
+// =====================================================================
 
-  // Log (server-side) when our server has started
+// Starting our servers
+serverOne.listen(PORTONE, function() {
+
+  // Callback triggered when server is successfully listening. Hurray!
   console.log("Server listening on: http://localhost:" + PORTONE);
 });
 
-server.listen(PORTTWO, function() {
-    console.log("Server listening on: http://localhost:" + PORTTWO);
+serverTwo.listen(PORTTWO, function() {
+
+  // Callback triggered when server is successfully listening. Hurray!
+  console.log("Server listening on: http://localhost:" + PORTTWO);
 });
